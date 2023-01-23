@@ -2,49 +2,71 @@
 #include <stdlib.h>
 
 /**
- * _itoa - Converts an int to a string
- * @num: Number to be converted
+ * _itoa - converts an int to a string
+ * @a: number to be converted
  *
- * Return: Pointer to string that can be freed using malloc
+ * Return: pointer to string that can be freed using malloc
 */
-char *_itoa(int num)
+char *_itoa(int a)
 {
-	char *string, *pointer;
-	int remainder, quotient, string_size;
+	char *string, *p;
+	int rem, quo, size_of_string;
 
-	remainder = 0;
-	quotient = _abs(num);
-	string_size = digits_count((unsigned int) num);
+	rem = 0;
+	quo = _abs(a);
+	size_of_string = number_of_digits((unsigned int) a);
 
-	if (num < 0)
-		string_size++;
+	if (a < 0)
+		size_of_string++;
 
-	string = malloc(sizeof(char) * (string_size + 1));
+	string = malloc(sizeof(char) * (size_of_string + 1));
 
 	if (!string)
 		exit(1);
 
-	if (num == 0)
+	if (a == 0)
 	{
 		string[0] = '0';
 		string[1] = '\0';
 		return (string);
 	}
-	pointer = string;
-	while ((quotient / 10 != 0) || (quotient % 10 != 0))
+	p = string;
+	while ((quo / 10 != 0) || (quo % 10 != 0))
 	{
-		remainder = quotient % 10;
-		*pointer = remainder + '0';
-		quotient /= 10;
-		pointer++;
+		rem = quo % 10;
+		*p = rem + '0';
+		quo /= 10;
+		p++;
 	}
-	if (num < 0)
+	if (a < 0)
 	{
-		*pointer = '-';
-		pointer++;
+		*p = '-';
+		p++;
 	}
 	reverse_string(string);
-	*pointer = '\0';
+	*p = '\0';
 
 	return (string);
+}
+
+/**
+ * number_of_digits - returns number of digits for an int
+ * @d: number
+ *
+ * Return: number of digits
+*/
+int number_of_digits(unsigned int d)
+{
+	int count = 0;
+
+	if (d == 0)
+		return (1);
+
+	while (d / 10 != 0)
+	{
+		count++;
+		d /= 10;
+	}
+
+	return (d + 1);
 }

@@ -1,27 +1,21 @@
 #include "main.h"
-/**
- * _puts - prints very other character in string.
- * @str: pointer to string.
- *
- * Return: void.
- */
-void _puts(char *str)
-{
-	int i;
-	int printed;
-	printed - 0;
 
-	i = 0;
-	while (str[i] != '\0')
+/**
+ * _puts - prints a string
+ * @s: string pointer
+ *
+ * Return: number of characters printed
+*/
+int _puts(char *s)
+{
+	int i = 0;
+
+	while (*s)
 	{
-		if (i % 2 == 0)
-		{
-			_putchar(str[i]);
-		}
+		_putchar(*s);
 		i++;
-		printed++;
+		s++;
 	}
-	_putchar('\n');
-	return (printed);
-	
+
+	return (i);
 }

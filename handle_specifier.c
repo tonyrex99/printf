@@ -3,58 +3,50 @@
 #include <stdlib.h>
 
 /**
- * handle_specifier - Handles specifiers for formatting
- * @specifier: The specifier to be handled
- * @args: va_list of the arguments
+ * handle_specifier - handles format specifiers
+ * @specifier: char representing a format specifier
+ * @va: va_list of the arguments
  *
  * Return: char pointer or NULL if no matching specifier
 */
-char *handle_specifier(char specifier, va_list args)
+char *handle_specifier(char specifier, va_list va)
 {
-	int number;
-	char *string, *tempString;
+	int a;
+	char *p, *tmp;
 
 	switch (specifier)
 	{
-		case 'c':
-			number = va_arg(args, int);
-			string = (char *)malloc(sizeof(char) * 2);
-			if (string == NULL)
-			{
-				exit(1);
-			}
-			string[0] = number;
-			string[1] = '\0';
-			return string;
+	case 'c':
+		a = (va_arg(va, int));
+		p = malloc(sizeof(char) * 2);
+		if (p == NULL)
+			exit(1);
+		p[0] = a;
+		p[1] = '\0';
+		return (p);
+	case '%':
+		p = malloc(sizeof(char) * 2);
+		if (p == NULL)
+			exit(1);
+		p[0] = '%';
+		p[1] = '\0';
+		return (p);
+	case 's':
+		tmp = va_arg(va, char *);
+		p = malloc((sizeof(char) * (_strlen(tmp) + 1)));
+		if (p == NULL)
+			exit(1);
+		*p = '\0';
+		_strcat(p, tmp);
+		return (p);
 
-		case '%':
-			string = (char *)malloc(sizeof(char) * 2);
-			if (string == NULL)
-			{
-				exit(1);
-			}
-			string[0] = '%';
-			string[1] = '\0';
-			return string;
+	case 'd':
+	case 'i':
+		a =  va_arg(va, int);
+		p = _itoa(a);
+		return (p);
 
-		case 's':
-			tempString = va_arg(args, char *);
-			string = (char *)malloc(sizeof(char) * (_strlen(tempString) + 1));
-			if (string == NULL)
-			{
-				exit(1);
-			}
-			*string = '\0';
-			_strcat(string, tempString);
-			return string;
-
-		case 'd':
-		case 'i':
-			number = va_arg(args, int);
-			string = _itoa(number);
-			return string;
-
-		default:
-			return NULL;
+	default:
+		return (NULL);
 	}
 }

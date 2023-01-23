@@ -2,13 +2,13 @@
 #include <unistd.h>
 
 /**
- * _putchar - Prints a character to stdout
- * @character: Character to print
+ * _putchar - prints a character to stdout
+ * @c: character to print
  *
  * Return: void
 */
 
-void _putchar(char character)
+void _putchar(char c)
 {
-	write(1, (void *) &character, 1);
+	write(1, (void *) &c, 1);
 }

@@ -3,44 +3,44 @@
 #include <stdlib.h>
 
 /**
- * _printf - Prints formatted strings
- * @format: Formatted string
+ * _printf - prints formatted strings
+ * @format: formatted string
  *
- * Return: Number of characters printed
+ * Return: number of characters printed
 */
 int _printf(const char *format, ...)
 {
-	int numChars = 0;
-	char *pointer, *output, specifier;
-	va_list argsList;
+	int count = 0;
+	char *p, *result, specifier;
+	va_list args;
 
-	pointer = (char *) format;
+	p = (char *) format;
 
-	va_start(argsList, format);
+	va_start(args, format);
 
-	while (*pointer)
+	while (*p)
 	{
-		if (*pointer == '%')
+		if (*p == '%')
 		{
-			specifier = get_specifier(pointer);
+			specifier = get_specifier(p);
 
-			output = handle_specifier(specifier, argsList);
+			result = handle_specifier(specifier, args);
 
-			if (output)
+			if (result)
 			{
-				numChars += _puts(output);
-				free(output);
+				count += _puts(result);
+				free(result);
 			}
 
-			pointer += 2;
+			p += 2;
 		}
 		else
 		{
-			_putchar(*pointer);
-			numChars++;
-			pointer++;
+			_putchar(*p);
+			count++;
+			p++;
 		}
 	}
 
-	return (numChars);
+	return (count);
 }
