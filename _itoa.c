@@ -1,5 +1,5 @@
 #include "main.h"
-#include <stdlib.>
+#include <stdlib.h>
 
 /**
  * _itoa - converts an int to a string
