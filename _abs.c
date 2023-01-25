@@ -1,4 +1,3 @@
-#include "main.h"
 /**
  * _abs - returns the absolute of a number
  * @d: number
